@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity 勉強会 & ハンズオン</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent-gradient: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%);
+            --accent-color: #8e54e9;
+            --table-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Nav Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 0;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        /* Mouse Follower Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+
+        section {
+            padding: 8rem 0 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: #fff;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dim);
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--table-border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--table-border);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Q&A */
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .faq-question::before {
+            content: 'Q.';
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            color: var(--text-dim);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .faq-answer::before {
+            content: 'A.';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* Prompt Box */
+        .prompt-box {
+            background: #151518;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #fff;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-dim);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#intro">01. 思想</a>
+            <a href="#comparison">02. 比較</a>
+            <a href="#handson">03. 体験</a>
+            <a href="#supervisor">04. 監督者の役割</a>
+            <a href="#faq">05. FAQ</a>
+        </div>
+    </nav>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="container">
+        <header>
+            <div class="badge">Google Antigravity</div>
+            <h1>Agentic Coding<br>Workshop</h1>
+            <p class="subtitle">AIエージェントが「主役」になる新しい開発体験</p>
+        </header>
+
+        <section id="intro">
+            <h2>01. エージェントコーディングとは？</h2>
+            <div class="card">
+                <h3>発想の逆転：AIの中にツールがある</h3>
+                <p>Antigravityは単なる「AI内蔵エディタ」ではありません。<br><span class="highlight">「AIエージェントの中に、エディタ・ターミナル・ブラウザが含まれている」</span>という発想の逆転から生まれたプラットフォームです。</p>
+                <div class="grid">
+                    <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="margin-bottom: 0.5rem;">従来のAIコーディング</h4>
+                        <p style="font-size: 0.9rem;">人間がメイン。AIは「補佐役」。<br>チャットでコードをもらって、人間がコピペするスタイル。</p>
+                    </div>
+                    <div style="background: rgba(142, 84, 233, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--accent-color);">
+                        <h4 style="margin-bottom: 0.5rem;">エージェントコーディング</h4>
+                        <p style="font-size: 0.9rem;">AIがメイン。人間は「監督」。<br>エージェントが自律的に計画・実行・検証をループするスタイル。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison">
+            <h2>02. 他のツールと何が違う？</h2>
+            <div class="card">
+                <h3>ツール群のポジショニング</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th>ChatGPT (ブラウザ版)</th>
+                                <th>Antigravity</th>
+                                <th>Claude Code / Gemini CLI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>役割</td>
+                                <td>優秀なインターン</td>
+                                <td>自律的なチーム / 部下</td>
+                                <td>精密工具 / 職人</td>
+                            </tr>
+                            <tr>
+                                <td>実行力</td>
+                                <td>提案（コード出力）のみ</td>
+                                <td>完遂（編集・実行・検証）</td>
+                                <td>ターミナル操作に特化</td>
+                            </tr>
+                            <tr>
+                                <td>管理</td>
+                                <td>1チャット1タスク</td>
+                                <td>複数エージェント並列管理</td>
+                                <td>シングルタスク（CLI）</td>
+                            </tr>
+                            <tr>
+                                <td>体験</td>
+                                <td>「会話」</td>
+                                <td>「作業場 (IDE)」</td>
+                                <td>「コマンド操作」</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size: 0.9rem; font-style: italic;">※Antigravityは2026年3月現在、Public Preview中のため Gemini 3 Pro 等が個人利用無料で利用可能です。</p>
+            </div>
+        </section>
+
+        <section id="handson">
+            <h2>03. Hands-on: Agentic Experience</h2>
+            <div class="card">
+                <div class="step-number">STEP 1: 生成</div>
+                <h3>爆速ポートフォリオ作成</h3>
+                <p>エージェントに「目的」を伝え、ファイルをゼロから作らせます。</p>
+                <div class="prompt-box">
+                    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    <code>"モダンでダークなエンジニア向けのポートフォリオサイトを作って。自己紹介、スキル一覧、経歴セクションを含めて。デザインはプレミアムな感じで。"</code>
+                </div>
+                <p style="font-size: 0.9rem;">→ <span class="highlight">Plan Artifact</span> を開き、エージェントが立てた計画をレビューしましょう。</p>
+            </div>
+
+            <div class="card">
+                <div class="step-number">STEP 2: 磨き上げ</div>
+                <h3>インタラクションの追加 (Wow)</h3>
+                <p>既存のコードを読み取らせ、さらに高度な演出を追加させます。</p>
+                <div class="prompt-box">
+                    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    <code>"このサイトに、スクロールすると要素がふわっと浮き上がるアニメーションを追加して。あと、背景にマウスの動きに追従するほのかな光のエフェクト（マウスストーカー）も入れて。"</code>
+                </div>
+                <p style="font-size: 0.9rem;">→ エージェントがブラウザを立ち上げ、<span class="highlight">自動で動作確認</span>する様子を観察してください。</p>
+            </div>
+        </section>
+
+        <section id="supervisor">
+            <h2>04. 人間（あなた）は「監督者」</h2>
+            <div class="card">
+                <h3>エージェントを使いこなすマインドセット</h3>
+                <p>エージェントコーディングにおいて、人間の役割は「コードを書くこと」から <span class="highlight">「意思決定と検証」</span> へとシフトします。</p>
+                <ul>
+                    <li><span class="highlight">指示 (Context)</span>: 何を作りたいか、どんな技術セットを使うかを明確に伝える。</li>
+                    <li><span class="highlight">計画の承認 (Review)</span>: Plan Artifact を確認し、間違った方向に進まないようガイドする。</li>
+                    <li><span class="highlight">結果の評価 (Feedback)</span>: ブラウザの動作確認結果を見て、追加の指示を出す。</li>
+                </ul>
+                <p style="margin-top: 1rem;">AIに「任せきり」にするのではなく、<span class="highlight">伴走しながら目的地へ導く</span> 感覚が成功の鍵です。</p>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>05. 初心者が気になるFAQ</h2>
+            <div class="card">
+                <div class="faq-item">
+                    <div class="faq-question">プログラミング知識ゼロでも使えますか？</div>
+                    <div class="faq-answer">
+                        完全にゼロは厳しいですが、「指示（プロンプト）」を工夫すればAIがコードの大部分を書いてくれます。初心者は「AIが書いたコードの監督役」として、少しずつ仕組みを学んでいくのが近道です。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">セキュリティやプライバシーは大丈夫？</div>
+                    <div class="faq-answer">
+                        コードはGoogleのクラウドで処理されます。Preview版のため、会社の超機密プロジェクトなどは避け、個人学習やオープンなプロジェクトから始めるのが推奨されています。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">料金はずっと無料ですか？</div>
+                    <div class="faq-answer">
+                        現在は Public Preview 中のため個人利用は無料です。将来的に Google AI Pro などの有料プランに統合される可能性がありますが、今のうちに先端機能を体感しておくメリットは大きいです。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">挫折しないコツはありますか？</div>
+                    <div class="faq-answer">
+                        「いい感じに作って」のような曖昧な指示を避け、最初は小さな機能を1つずつ頼むのがコツです。<span class="highlight">Plan Mode</span> を使い、AIが実行する前に計画を確認する癖をつけましょう。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Antigravity Workshop | Presented by Antigravity AI Assistant</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth reveal on scroll
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Copy prompt function
+        function copyPrompt(btn) {
+            const code = btn.nextElementSibling.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = originalText, 2000);
+            });
+        }
+
+        // Background Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let mouseX = 0, mouseY = 0;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 250 + 100;
+                this.color = Math.random() > 0.5 ? '#8e54e9' : '#4776e6';
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Follow mouse slightly
+                this.x += (mouseX - this.x) * 0.003;
+                this.y += (mouseY - this.y) * 0.003;
+
+                if (this.x < -this.size) this.x = width + this.size;
+                if (this.x > width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = height + this.size;
+                if (this.y > height + this.size) this.y = -this.size;
+            }
+        }
+
+        const particles = Array.from({ length: 6 }, () => new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
