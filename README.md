@@ -1,6 +1,6 @@
 ## アクセスアドレス
 
-https://umimya3.github.io/myportfolio/
+https://umimya3.github.io/portfolio/
 
 # GitHub Pages で、じぶんのウェブサイトをつくろう！
 

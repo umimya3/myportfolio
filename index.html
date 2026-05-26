@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>業務成果ポートフォリオ (2024-2026)</title>
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #2c3e50;
+            --text-color: #37474f;
+            --muted-color: #78909c;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --accent-gold: #c0a060;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-print-color-adjust: exact;
+        }
+
+        header {
+            background-color: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        header img {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .year-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        .year-header .badge {
+            background-color: var(--accent-gold);
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-left: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-color);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            margin-bottom: 0;
+        }
+
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background-color: #fcfcfc;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-footer::after {
+            content: "→";
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-footer::after {
+            transform: translateX(5px);
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--muted-color);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media print {
+            body {
+                font-size: 12pt;
+            }
+
+            .container {
+                max-width: 100%;
+                width: 100%;
+                padding: 0;
+            }
+
+            .card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .year-header {
+                page-break-before: auto;
+            }
+
+            .grid {
+                gap: 1rem;
+            }
+
+            header,
+            .intro {
+                margin-bottom: 2rem;
+            }
+
+            .card {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="2024/assets/img/header-image.png" alt="ヘッダーロゴ">
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h1>業務成果ポートフォリオ</h1>
+            <p>2024年度から2026年度にかけての主要な業務成果およびプログラミング、AI関連の活動をまとめた報告資料です。</p>
+        </div>
+
+        <!-- 2026 Section -->
+        <section id="year-2026">
+            <div class="year-header">
+                <h2>2026年度 成果項目</h2>
+                <span class="badge">Current</span>
+            </div>
+            <div class="grid">
+                <a href="2026/reports/report01.html" class="card">
+                    <img src="2026/assets/img/study_group_vol5_guide.png" alt="生成AI勉強会">
+                    <div class="card-content">
+                        <h3>学内生成AI勉強会の実施</h3>
+                        <p>AIエージェントのハンズオン（vol.4）や「AI漫画入門」（vol.5）など、学内のAI活用推進勉強会を実施しました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2026/reports/report02.html" class="card">
+                    <img src="2026/assets/img/academic_paper_llm.png" alt="高専学会">
+                    <div class="card-content">
+                        <h3>高専学会への記事投稿</h3>
+                        <p>「ブリリアントジャーク・プロンプティング」を用いた、LLMによる厳しいフィードバック支援に関する論文を投稿しました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2026/reports/report03.html" class="card">
+                    <img src="2026/assets/img/seating_guide_tool.png" alt="学内ツール">
+                    <div class="card-content">
+                        <h3>学内便利ツールの開発</h3>
+                        <p>移転に伴うオフィス配置シミュレーションツールや、インタラクティブ座席案内ツールをWebで構築・公開しました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2026/reports/report04.html" class="card">
+                    <img src="2026/assets/img/exam_guide_banner_adopted.png" alt="広報バナー">
+                    <div class="card-content">
+                        <h3>広報バナー・ポスターの制作</h3>
+                        <p>学務課と連携し、なかもずキャンパス移転PRおよび入学願書受付のバナー・電子ポスターを制作しました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 2025 Section -->
+        <section id="year-2025">
+            <div class="year-header" style="border-bottom-color: var(--border-color);">
+                <h2 style="color: var(--secondary-color);">2025年度 アーカイブ</h2>
+                <span class="badge" style="background-color: var(--muted-color);">Archive</span>
+            </div>
+            <div class="grid">
+                <a href="2025/reports/report01.html" class="card">
+                    <img src="2025/assets/img/高専学会バナー.png" alt="高専学会">
+                    <div class="card-content">
+                        <h3>高専学会での発表</h3>
+                        <p>「高専教育におけるLLMへのロール付与による指導困難の克服提案」として、外部への成果発信を行いました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2025/reports/report02.html" class="card">
+                    <img src="2025/assets/img/第2回勉強会の様子.png" alt="勉強会">
+                    <div class="card-content">
+                        <h3>学内生成AI勉強会の実施</h3>
+                        <p>GeminiのCLI活用からエッジAI「Nano Banana」による画像生成まで、実戦的なワークショップを主導しました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2025/reports/report03.html" class="card">
+                    <img src="2025/assets/img/松尾研イメージバナー.jpeg" alt="松尾研">
+                    <div class="card-content">
+                        <h3>東京大学 松尾研究室 講座修了</h3>
+                        <p>GCI 2025 Summerおよび大規模言語モデル講座を修了し、高度な専門技術を習得しました。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 2024 Section -->
+        <section id="year-2024">
+            <div class="year-header" style="border-bottom-color: var(--border-color);">
+                <h2 style="color: var(--secondary-color);">2024年度 アーカイブ</h2>
+                <span class="badge" style="background-color: var(--muted-color);">Archive</span>
+            </div>
+            <div class="grid">
+                <a href="2024/reports/report40.html" class="card">
+                    <img src="2024/assets/img/report40.png" alt="生成AI">
+                    <div class="card-content">
+                        <h3>生成AI関係</h3>
+                        <p>2024年度における生成AI活用の資料と成果を示します。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2024/reports/report20.html" class="card">
+                    <img src="2024/assets/img/report20.png" alt="プログラミング">
+                    <div class="card-content">
+                        <h3>プログラミング関係</h3>
+                        <p>Pythonを用いた業務効率化ツールの開発実績です。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2024/reports/report10.html" class="card">
+                    <img src="2024/assets/img/report10.png" alt="3Dプリンタ">
+                    <div class="card-content">
+                        <h3>3Dプリンタ関係</h3>
+                        <p>3Dプリンタを活用した実製作と加工実績のまとめです。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2024/reports/report30.html" class="card">
+                    <img src="2024/assets/img/report30.png" alt="レーザー加工機">
+                    <div class="card-content">
+                        <h3>レーザー加工機関係</h3>
+                        <p>レーザー加工機を用いた試作・成果、加工技術の記録です。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2024/reports/report60.html" class="card">
+                    <img src="2024/assets/img/report60.png" alt="データ分析">
+                    <div class="card-content">
+                        <h3>データ分析・機械学習</h3>
+                        <p>松尾研究室主催 of 講座受講を通じたデータ活用の基礎技術習得。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+
+                <a href="2024/reports/report70.html" class="card">
+                    <img src="2024/assets/img/report70.png" alt="設計競技会">
+                    <div class="card-content">
+                        <h3>夏季設計競技会</h3>
+                        <p>機械学会主催の設計競技会への参加と、その成果物の記録です。</p>
+                    </div>
+                    <div class="card-footer">詳細を見る</div>
+                </a>
+            </div>
+        </section>
+
+        <p class="last-updated">最終更新日：2026年5月26日</p>
+    </div>
+</body>
+
+</html>

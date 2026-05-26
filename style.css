@@ -1,0 +1,56 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #333;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.card:hover {
+    background-color: #444;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 0.9em;
+}
+
+.container {
+    width: 80%; /* 必要に応じて幅を調整 */
+    margin: 0 auto; /* 中央揃え */
+    padding: 20px;
+}
+
+.item {
+    background-color: #f0f0f0; /* 背景色 */
+    margin-bottom: 10px; /* 項目間の余白 */
+    padding: 10px;
+    border-radius: 5px; /* 角丸デザイン */
+}
+
