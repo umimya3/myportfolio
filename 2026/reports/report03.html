@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学内便利ツールの開発 - 2026年度ポートフォリオ</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #1a237e;
+            border-bottom: 2px solid #1a237e;
+            padding-bottom: 0.5rem;
+        }
+
+        .back {
+            margin-top: 2rem;
+            display: inline-block;
+            text-decoration: none;
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        .tool-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-card img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            background-color: #fafafa;
+            border-bottom: 1px solid #eee;
+            display: block;
+        }
+
+        .tool-content {
+            padding: 1.5rem;
+        }
+
+        .tool-content h3 {
+            margin-top: 0;
+            color: #1a237e;
+        }
+
+        .tool-link {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .tool-link:hover {
+            background: #0d125a;
+        }
+
+        .content-section {
+            margin-top: 2rem;
+        }
+
+        .content-section h2 {
+            font-size: 1.25rem;
+            color: #1a237e;
+            border-left: 5px solid #c0a060;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>学内便利ツールの開発</h1>
+
+    <div class="tool-gallery">
+        <!-- ツール1 -->
+        <div class="tool-card">
+            <img src="../assets/img/office_relocation_tool.png" alt="オフィス検討ツール 画面">
+            <div class="tool-content">
+                <h3>学舎移転に伴うオフィス配置検討ツール</h3>
+                <p>
+                    学舎の引っ越し作業に伴い、新しいオフィスレイアウトや機器配置をWebブラウザ上で直感的にドラッグ＆ドロップなどでシミュレーション・検討できるユーティリティツールです。
+                </p>
+                <a href="https://claude.ai/public/artifacts/0b803184-8fcd-4358-8132-956096ccdf9a" class="tool-link" target="_blank">ツール（Artifact）を試す</a>
+            </div>
+        </div>
+
+        <!-- ツール2 -->
+        <div class="tool-card">
+            <img src="../assets/img/seating_guide_tool.png" alt="座席案内ツール 画面">
+            <div class="tool-content">
+                <h3>学内座席案内インタラクティブツール</h3>
+                <p>
+                    オフィスのレイアウト変更や移転後の座席配置を視覚的に分かりやすく整理し、教職員や来客者が座席位置を確認できる案内ツールです。
+                </p>
+                <a href="https://claude.ai/public/artifacts/f31b67c3-1cd7-4740-ba8f-dcfb91cce657" class="tool-link" target="_blank">ツール（Artifact）を試す</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>開発の背景と効果</h2>
+        <p>
+            学内施設の移転準備において、図面ベースでの検討や周知作業には多くのコストがかかっていました。これを解決するため、AIエージェント等の支援を受けながらインタラクティブなWebツールを迅速に開発しました。
+        </p>
+        <p style="margin-top: 1rem;">
+            どちらのツールも視覚的なインターフェース（UI/UX）に注力し、関係者間での合意形成のスピードアップ、および引越し・配置周知の手間を劇的に削減することに貢献しました。
+        </p>
+    </div>
+
+    <div style="margin-top: 3rem;">
+        <a href="../../index.html" class="back">← トップページへ戻る</a>
+    </div>
+</body>
+
+</html>
